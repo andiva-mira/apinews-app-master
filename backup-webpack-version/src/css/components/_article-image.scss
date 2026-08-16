@@ -1,0 +1,22 @@
+.image-container {
+	@include flex-col;
+	width: 98%;
+	background-image: linear-gradient(to bottom, lighten($primaryA, 40) 0%, lighten($primaryB, 40) 100%);
+
+
+	@include mq(lmedium) {
+		width: 40%;
+	}
+
+	.image {
+		box-sizing: border-box;
+		display: block;
+		max-width: 100%;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: right;
+		position: relative;	
+	}
+}
+

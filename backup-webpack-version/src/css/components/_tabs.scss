@@ -1,0 +1,63 @@
+.news-tabs {
+	padding: 20px 0;
+	text-align: center;
+	@include flex-col;
+	
+	@include mq(medium) {
+		padding: 40px 0;
+		@include flex-row;
+	}
+
+	a {
+		font-family: $fontContent;
+		font-size: $fontSize*1.3;
+		font-weight: 300;
+		line-height: 0.94;
+		letter-spacing: 5px;
+		text-align: center;
+		text-decoration: none;
+		color: darken($primaryB, 5);
+		padding: 5px;
+		text-transform: lowercase;
+		position: relative;
+		margin-right: 10px;
+		margin-bottom: 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		@include mq(xsmall) {
+			font-size: $fontSize*1.7;
+		}
+
+		@include mq(medium) {
+			margin-bottom: 0; 
+			
+			&::after {
+				content: "|";
+				position: absolute;
+				right: -10px;
+				top: 0;
+				color: darken($mainBg, 30);
+			}
+
+		}
+
+
+	}
+
+	.is-active {
+		background-color: $primaryA;
+		color: #fff;
+
+		@include mq(medium) {
+			&::after {
+				content: " ";
+			}
+		}
+
+	}
+
+
+}

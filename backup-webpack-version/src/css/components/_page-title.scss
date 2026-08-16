@@ -1,0 +1,39 @@
+.page-title {
+	top:0;
+	right: 0;
+	position: absolute;
+
+	h1 {
+	    font-size:  $fontSize*2.7;
+	    font-weight: 300;
+	    letter-spacing: 1px;
+	    line-height: 90px;
+	    padding-right: 10px;
+	    text-align: right;
+	    text-transform: lowercase;
+	    margin-top: 5px;
+	    background-image: linear-gradient(to left, lighten($primaryA, 10) 0%, lighten($primaryB, 10) 100%);
+	    color: #fff;
+	    clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%,10% 50%);
+	    background-size: 100%;
+	    width: 250px;
+	    height: 100px;
+	    mix-blend-mode: multiply;
+
+	    @include mq(small) {
+			font-size: $fontSize*4.57;
+			letter-spacing: 1.4px;
+			line-height: 130px;
+			width: 400px;
+			height: 150px;	
+	    }
+
+	    @include mq(medium) {
+			font-size: $fontSize*5.43;
+			line-height: 160px;
+			width: 500px;
+			height: 180px;
+	    }
+	}
+
+}

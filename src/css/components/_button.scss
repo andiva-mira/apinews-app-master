@@ -1,0 +1,66 @@
+	.btn {
+		// background-image: url(../../images/arrow.svg);
+		// background-repeat: no-repeat;
+		// background-size: 20%;
+		// background-position: 95% 50%;
+		color: #fff;
+		font-family: $fontHeadings;
+		font-weight: 300;
+		line-height: 50px;
+		text-decoration: none;
+		text-transform: uppercase;
+		background-color: $primaryA;
+		width: 160px;
+		border-radius: 30px;
+		padding: 0;
+		margin: 20px 0 0;
+		text-align: center;
+		position: relative;
+		overflow: hidden;
+		transition: all .8s ease-in;
+
+		&::after {
+			// background-image: url(../../images/arrow.svg);
+			// background-repeat: no-repeat;
+			// background-size: 20%;
+			// background-position: 95% 50%;
+			@include pseudo($content: "READ MORE");
+			text-align: center;
+			background-color: $primaryB;
+			width: 100%;
+			line-height: 50px;
+			transition: all .6s ease-in;
+			transform: translate3d(-200px, 0, 0);
+			opacity: 0;
+		}
+
+		&:hover {
+			// background-position: 200% 50%;
+
+			&::after {
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+			}
+
+			.btn-text {
+				transform: translate3d(200px, 0, 0);
+			}
+
+		}
+
+		.btn-text {
+			display: inline-block;
+			transition: all .8s ease-in;
+			transform: translate3d(0, 0, 0);
+		}
+
+		&--odd {
+			background-color: $primaryB;
+
+			&::after {
+				background-color: $primaryA;
+			}
+
+		}
+
+	}
