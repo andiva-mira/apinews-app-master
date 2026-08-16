@@ -1,5 +1,0 @@
-@function randomNum($limit) {
-  $random: random();
-  $randomNum: floor(($random * $limit) + 1);
-  @return $randomNum;
-}
