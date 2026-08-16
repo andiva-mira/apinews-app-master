@@ -1,7 +1,35 @@
 // Headline Feed API
 // https://headlinefeed.dev/documentation
-const BEARER_TOKEN = 'hlf_52ed296a508d412aa74a5fc0c0a3e8f5';
-const BASE_URL = 'https://api.headlinefeed.dev';
+//
+// In production this goes through /api/headlines, a Vercel serverless function
+// that holds the bearer token server-side (see api/headlines.js) - headlinefeed's
+// CORS policy only allows localhost, and this also keeps the token out of the
+// public bundle. In local dev we call headlinefeed directly, since localhost is
+// already an allowed origin; import.meta.env.DEV is statically replaced with
+// `false` in production builds, so this whole branch (token included) is
+// dead-code-eliminated and never ships.
+const DEV_BEARER_TOKEN = 'hlf_52ed296a508d412aa74a5fc0c0a3e8f5';
+const DEV_URL = 'https://api.headlinefeed.dev/api/search';
+const PROD_URL = '/api/headlines';
+
+function fetchHeadlines(source) {
+	if (import.meta.env.DEV) {
+		return fetch(DEV_URL, {
+			method: 'POST',
+			headers: {
+				'Authorization': `Bearer ${DEV_BEARER_TOKEN}`,
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ source })
+		});
+	}
+
+	return fetch(PROD_URL, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ source })
+	});
+}
 
 // Client-side only: caps how many real requests *this browser* makes per day,
 // then serves cached results instead. Since the token is public in the bundle,
@@ -61,14 +89,7 @@ export async function searchHeadlines(source) {
 
 	let response;
 	try {
-		response = await fetch(`${BASE_URL}/api/search`, {
-			method: 'POST',
-			headers: {
-				'Authorization': `Bearer ${BEARER_TOKEN}`,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ source })
-		});
+		response = await fetchHeadlines(source);
 	} catch (networkError) {
 		if (cached) return cached.headlines;
 		throw networkError;
